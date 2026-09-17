@@ -61,6 +61,8 @@ COPY . .
 # Built frontend assets
 COPY --from=frontend /app/public/build ./public/build
 
+RUN php artisan filament:assets
+
 # Nginx configuration
 COPY docker/nginx/default.dokploy.conf /etc/nginx/conf.d/default.conf
 
