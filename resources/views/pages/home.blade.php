@@ -66,15 +66,6 @@
 
         <div class="mt-10 grid gap-6 lg:grid-cols-3">
 
-            {{-- Météo --}}
-            <x-site.weather-card
-                :temperature="$weather['temperature']"
-                :apparent-temperature="$weather['apparent_temperature']"
-                :humidity="$weather['humidity']"
-                :wind-speed="$weather['wind_speed']"
-                :description="$weather['description']"
-                :icon="$weather['icon']" />
-
             {{-- Horaires --}}
             <div class="rounded-2xl border border-stone-200 bg-white p-6">
 
@@ -111,7 +102,6 @@
                 </div>
 
             </div>
-
 
             {{-- Contact --}}
             <div class="rounded-2xl border border-stone-200 bg-white p-6">
@@ -152,6 +142,15 @@
                 </div>
 
             </div>
+
+            {{-- Météo --}}
+            <x-site.weather-card
+                :temperature="$weather['temperature']"
+                :apparent-temperature="$weather['apparent_temperature']"
+                :humidity="$weather['humidity']"
+                :wind-speed="$weather['wind_speed']"
+                :description="$weather['description']"
+                :icon="$weather['icon']" />
 
         </div>
 
