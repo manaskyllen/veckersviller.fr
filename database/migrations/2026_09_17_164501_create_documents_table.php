@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignUuid('document_type_id')
                 ->constrained()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->string('title');
             $table->date('document_date')->nullable();
             $table->string('file_path');
