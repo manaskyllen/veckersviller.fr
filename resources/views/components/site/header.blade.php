@@ -4,20 +4,22 @@
         {{-- Logo / identité de la commune --}}
         <a
             href="{{ route('home') }}"
-            class="flex items-center gap-3">
-            {{-- Placeholder du blason --}}
+            class="flex items-center gap-4">
             <div
-                class="flex size-11 items-center justify-center rounded-xl bg-primary-900 text-sm font-bold text-white"
+                class="flex items-center justify-center rounded-xl text-sm font-bold text-white"
                 aria-hidden="true">
-                V
+                <img
+                    src="{{ Storage::url($site->logo_header) }}"
+                    alt="Blason de Veckersviller"
+                    class="size-14" />
             </div>
 
             <div>
-                <div class="text-sm font-semibold tracking-tight text-primary-950">
-                    Veckersviller
+                <div class="text-xl font-semibold tracking-tight text-primary-950">
+                    Mairie de Veckersviller
                 </div>
 
-                <div class="text-xs text-stone-500">
+                <div class="text-sm text-stone-500">
                     Commune de Moselle
                 </div>
             </div>
@@ -27,23 +29,43 @@
         <nav
             class="hidden items-center gap-8 md:flex"
             aria-label="Navigation principale">
+
+            {{-- Accueil --}}
             <a
                 href="{{ route('home') }}"
-                class="text-sm font-medium text-stone-600 transition hover:text-primary-900">
+                @class([ 'py-2 text-sm font-medium transition' , 'border-b-2 border-primary-900 text-primary-900'=> request()->routeIs('home'),
+                'text-stone-600 hover:text-primary-900' => !request()->routeIs('home'),
+                ])>
                 Accueil
             </a>
 
+            {{-- Actualités --}}
             <a
                 href="{{ route('posts.index') }}"
-                class="text-sm font-medium text-stone-600 transition hover:text-primary-900">
+                @class([ 'py-2 text-sm font-medium transition' , 'border-b-2 border-primary-900 text-primary-900'=> request()->routeIs('posts.*'),
+                'text-stone-600 hover:text-primary-900' => !request()->routeIs('posts.*'),
+                ])>
                 Actualités
             </a>
 
+            {{-- Documents --}}
             <a
                 href="{{ route('documents.index') }}"
-                class="text-sm font-medium text-stone-600 transition hover:text-primary-900">
+                @class([ 'py-2 text-sm font-medium transition' , 'border-b-2 border-primary-900 text-primary-900'=> request()->routeIs('documents.*'),
+                'text-stone-600 hover:text-primary-900' => !request()->routeIs('documents.*'),
+                ])>
                 Documents
             </a>
+
+            {{-- Nous contacter --}}
+            <a
+                href="{{ route('contact') }}"
+                @class([ 'py-2 text-sm font-medium transition' , 'border-b-2 border-primary-900 text-primary-900'=> request()->routeIs('contact'),
+                'text-stone-600 hover:text-primary-900' => !request()->routeIs('contact'),
+                ])>
+                Nous contacter
+            </a>
+
         </nav>
 
         {{-- Menu mobile --}}

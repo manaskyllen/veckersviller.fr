@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title', 'Actualités | Mairie de Veckersviller')
+
+@section('description', 'Retrouvez les dernières actualités et informations de la commune de Veckersviller en Moselle.')
+
 @section('content')
 
 {{-- En-tête --}}

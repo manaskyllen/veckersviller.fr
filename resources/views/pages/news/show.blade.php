@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title', $post->title . ' | Mairie de Veckersviller')
+
+@section('description')
+{{ \Illuminate\Support\Str::limit(strip_tags($post->description), 155) }}
+@endsection
+
 @section('content')
 
 <article>

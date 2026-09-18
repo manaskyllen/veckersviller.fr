@@ -3,46 +3,82 @@
 @section('content')
 
 {{-- Hero --}}
-<section class="relative overflow-hidden bg-primary-950">
+<section class="relative min-h-[calc(100vh-64px)] overflow-hidden">
 
-    {{-- Placeholder image --}}
+    {{-- Image de fond --}}
+    <img
+        src="{{ Storage::url($site->hero_image) }}"
+        alt="Vue de Veckersviller"
+        class="absolute inset-0 h-full w-full object-cover object-center" />
+
+    {{-- Dégradé sombre à gauche --}}
     <div
-        class="absolute inset-0 bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800"
-        aria-hidden="true"></div>
+        class="absolute inset-0 bg-gradient-to-r
+               from-slate-950/90
+               via-slate-950/60
+               to-transparent">
+    </div>
 
-    <div class="relative">
-        <x-site.container class="py-24 sm:py-32 lg:py-40">
+    {{-- Léger assombrissement en bas --}}
+    <div
+        class="absolute inset-0 bg-gradient-to-t
+               from-slate-950/30
+               via-transparent
+               to-transparent">
+    </div>
 
-            <div class="max-w-3xl">
+    {{-- Contenu --}}
+    <div class="relative z-10 min-h-[88vh]">
+        <x-site.container class="flex min-h-[88vh] items-center">
 
-                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent-500">
+            <div class="max-w-2xl">
+
+                {{-- Sur-titre --}}
+                <p class="text-sm font-semibold uppercase tracking-[0.25em] text-accent-600">
                     Commune de Moselle
                 </p>
 
-                <h1 class="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    Bienvenue à Veckersviller
+                {{-- Titre --}}
+                <h1 class="mt-5 text-6xl font-bold leading-[1.05] tracking-tight text-white lg:text-7xl">
+                    Bienvenue à<br>
+                    Veckersviller
                 </h1>
 
-                <p class="mt-6 max-w-2xl text-lg leading-8 text-primary-100 sm:text-xl">
+                {{-- Description --}}
+                <p class="mt-7 max-w-xl text-xl leading-relaxed text-white/90">
                     Retrouvez les actualités de la commune,
                     les informations pratiques et les documents municipaux.
                 </p>
 
-                <div class="mt-8 flex flex-wrap gap-3">
+                {{-- Boutons --}}
+                <div class="mt-10 flex flex-wrap gap-4">
 
                     <a
-                        href="{{ route('posts.index') }}"
-                        class="inline-flex items-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-primary-950 transition hover:bg-stone-100">
+                        href="/actualites"
+                        class="inline-flex items-center gap-4 rounded-xl bg-white px-8 py-4
+                               font-semibold text-slate-900 transition
+                               hover:bg-slate-100">
                         Voir les actualités
 
-                        <span class="ml-2" aria-hidden="true">
-                            →
-                        </span>
+                        <svg
+                            class="h-5 w-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M5 12h14m-6-6 6 6-6 6" />
+                        </svg>
                     </a>
 
                     <a
-                        href="{{ route('documents.index') }}"
-                        class="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15">
+                        href="/documents"
+                        class="inline-flex items-center rounded-xl border
+                               border-white/40 bg-white/10 px-8 py-4
+                               font-semibold text-white backdrop-blur-sm
+                               transition hover:bg-white/20">
                         Documents municipaux
                     </a>
 
@@ -90,21 +126,56 @@
                     Horaires de la mairie
                 </h3>
 
-                <p class="mt-2 text-sm leading-6 text-stone-600">
-                    Retrouvez les horaires d'ouverture et les modalités
-                    d'accueil de la mairie.
-                </p>
+                <div class="mt-5 space-y-1 text-sm">
 
-                <div class="mt-5">
-                    <span class="text-sm font-semibold text-primary-800">
-                        Informations à venir
-                    </span>
+                    @foreach ($openingHours as $openingHour)
+
+                    <div class="flex items-start justify-between gap-4">
+
+                        <span class="font-medium text-primary-950">
+                            {{ $openingHour->getDayNameAttribute() }}
+                        </span>
+
+                        @if (!$openingHour->is_open)
+
+                        <span class="text-stone-500">
+                            Fermé
+                        </span>
+
+                        @else
+
+                        <div class="text-right text-stone-600">
+
+                            @if ($openingHour->morning_open && $openingHour->morning_close)
+                            <div>
+                                {{ \Carbon\Carbon::parse($openingHour->morning_open)->format('H\hi') }}
+                                –
+                                {{ \Carbon\Carbon::parse($openingHour->morning_close)->format('H\hi') }}
+                            </div>
+                            @endif
+
+                            @if ($openingHour->afternoon_open && $openingHour->afternoon_close)
+                            <div>
+                                {{ \Carbon\Carbon::parse($openingHour->afternoon_open)->format('H\hi') }}
+                                –
+                                {{ \Carbon\Carbon::parse($openingHour->afternoon_close)->format('H\hi') }}
+                            </div>
+                            @endif
+
+                        </div>
+
+                        @endif
+
+                    </div>
+
+                    @endforeach
+
                 </div>
 
             </div>
 
-            {{-- Contact --}}
-            <div class="rounded-2xl border border-stone-200 bg-white p-6">
+            {{-- Localisation --}}
+            <div class="flex flex-col rounded-2xl border border-stone-200 bg-white p-6">
 
                 <div class="flex size-11 items-center justify-center rounded-xl bg-primary-50 text-primary-800">
                     <svg
@@ -128,15 +199,19 @@
                 </h3>
 
                 <address class="mt-2 not-italic text-sm leading-6 text-stone-600">
-                    Mairie de Veckersviller<br>
-                    Moselle
+                    Mairie de {{ $municipality->city }}<br>
+                    {{ $municipality->address }}<br>
+                    {{ $municipality->postal_code }}
+                    {{ $municipality->city }}
                 </address>
 
-                <div class="mt-5">
+                <div class="mt-auto pt-6">
                     <a
-                        href="#"
+                        href="https://www.google.com/maps/dir/?api=1&destination={{ urlencode($municipality->address . ', ' . $municipality->postal_code . ' ' . $municipality->city) }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="text-sm font-semibold text-primary-800 transition hover:text-primary-600">
-                        Voir les coordonnées
+                        Voir l’itinéraire
                         <span aria-hidden="true">→</span>
                     </a>
                 </div>
@@ -229,6 +304,18 @@
 
     </x-site.container>
 
+</section>
+
+<section class="bg-white" id="contact">
+    <x-site.container class="py-16 sm:py-20">
+        <x-site.section-heading
+            title="Nous contacter"
+            description="Une question, une demande ou besoin d'une information ? Contactez la mairie à l'aide du formulaire ci-dessous." />
+
+        <div class="mt-10">
+            <x-site.contact-form />
+        </div>
+    </x-site.container>
 </section>
 
 @endsection

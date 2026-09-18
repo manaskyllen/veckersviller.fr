@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title', 'Documents municipaux | Mairie de Veckersviller')
+
+@section('description', 'Consultez les documents municipaux de la commune de Veckersviller.')
+
 @section('content')
 
 {{-- En-tête --}}

@@ -27,6 +27,7 @@ class WeatherService
                             'relative_humidity_2m',
                             'weather_code',
                             'wind_speed_10m',
+                            'is_day',
                         ]),
                         'timezone' => 'Europe/Paris',
                     ])
@@ -34,6 +35,8 @@ class WeatherService
                     ->json();
 
                 $weatherCode = (int) $data['current']['weather_code'];
+
+                $isDay = (bool) $data['current']['is_day'];
 
                 return [
                     'temperature' => round(
@@ -46,7 +49,7 @@ class WeatherService
                         $data['current']['relative_humidity_2m']
                     ),
                     'description' => $this->getDescription($weatherCode),
-                    'icon' => $this->getIcon($weatherCode),
+                    'icon' => $this->getIcon($weatherCode, $isDay),
                     'wind_speed' => round(
                         $data['current']['wind_speed_10m']
                     ),
@@ -91,14 +94,14 @@ class WeatherService
         };
     }
 
-    private function getIcon(int $code): string
+    private function getIcon(int $code, bool $isDay): string
     {
         return match (true) {
             $code === 0
-            => 'sun',
+            => $isDay ? 'sun' : 'moon',
 
             in_array($code, [1, 2], true)
-            => 'partly-cloudy',
+            => $isDay ? 'partly-cloudy' : 'partly-cloudy-night',
 
             $code === 3
             => 'cloudy',
@@ -122,7 +125,7 @@ class WeatherService
             => 'storm',
 
             default
-            => 'sun',
+            => $isDay ? 'sun' : 'moon',
         };
     }
 }
