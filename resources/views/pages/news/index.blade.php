@@ -48,17 +48,13 @@
         @else
 
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
             @foreach ($posts as $index => $post)
-
             <div
                 data-reveal
                 style="--reveal-delay: {{ min($index * 100, 400) }}ms">
                 <x-site.post-card :post="$post" />
             </div>
-
             @endforeach
-
         </div>
 
         {{-- Pagination --}}
