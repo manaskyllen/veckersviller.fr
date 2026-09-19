@@ -11,15 +11,15 @@
 
     <x-site.container class="py-16 sm:py-20">
 
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent-600">
+        <p class="animate-hero text-sm font-semibold uppercase tracking-[0.2em] text-accent-600">
             Vie municipale
         </p>
 
-        <h1 class="mt-3 text-4xl font-semibold tracking-tight text-primary-950 sm:text-5xl">
+        <h1 class="animate-hero-delay-1 mt-3 text-4xl font-semibold tracking-tight text-primary-950 sm:text-5xl">
             Documents municipaux
         </h1>
 
-        <p class="mt-5 max-w-2xl text-lg leading-8 text-stone-600">
+        <p class="animate-hero-delay-2 mt-5 max-w-2xl text-lg leading-8 text-stone-600">
             Consultez les documents publiés par la commune de Veckersviller.
         </p>
 
@@ -37,6 +37,7 @@
         <form
             method="GET"
             action="{{ route('documents.index') }}"
+            data-reveal="scale"
             class="rounded-2xl border border-stone-200 bg-white p-5 sm:p-6">
 
             <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
@@ -61,8 +62,7 @@
 
                         <option
                             value="{{ $type->id }}"
-                            @selected(request('type')===$type->id)
-                            >
+                            @selected(request('type')===$type->id)>
                             {{ $type->name }}
                         </option>
 
@@ -107,14 +107,14 @@
 
                     <button
                         type="submit"
-                        class="flex-1 rounded-lg bg-primary-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-800 lg:flex-none">
+                        class="flex-1 rounded-lg bg-primary-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-primary-800 lg:flex-none">
                         Filtrer
                     </button>
 
                     @if (request()->hasAny(['type', 'year']))
                     <a
                         href="{{ route('documents.index') }}"
-                        class="rounded-lg border border-stone-200 px-5 py-2.5 text-sm font-semibold text-stone-700 transition hover:bg-stone-50">
+                        class="rounded-lg border border-stone-200 px-5 py-2.5 text-sm font-semibold text-stone-700 transition hover:-translate-y-0.5 hover:bg-stone-50">
                         Réinitialiser
                     </a>
                     @endif
@@ -131,7 +131,9 @@
 
             @if ($documents->isEmpty())
 
-            <div class="rounded-2xl border border-dashed border-stone-300 bg-white p-12 text-center">
+            <div
+                data-reveal
+                class="rounded-2xl border border-dashed border-stone-300 bg-white p-12 text-center">
 
                 <p class="font-medium text-primary-950">
                     Aucun document trouvé
@@ -153,11 +155,14 @@
 
             </div>
 
-
             {{-- Pagination --}}
             @if ($documents->hasPages())
-            <div class="mt-10">
+            <div
+                data-reveal
+                class="mt-10">
+
                 {{ $documents->links() }}
+
             </div>
             @endif
 

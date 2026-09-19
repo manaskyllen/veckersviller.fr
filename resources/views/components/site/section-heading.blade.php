@@ -5,7 +5,8 @@
 'linkText' => null,
 ])
 
-<div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+<div
+    {{ $attributes->merge(['class' => 'flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between']) }}>
 
     <div>
         <h2 class="text-2xl font-semibold tracking-tight text-primary-950 sm:text-3xl">

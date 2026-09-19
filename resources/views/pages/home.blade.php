@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('title', 'Mairie de Veckersviller | Site officiel')
+
+@section('description')
+Site officiel de la mairie de Veckersviller en Moselle :
+actualités, informations pratiques, horaires et documents municipaux.
+@endsection
+
 @section('content')
 
 {{-- Hero --}}
@@ -30,36 +37,29 @@
     {{-- Contenu --}}
     <div class="relative z-10 min-h-[88vh]">
         <x-site.container class="flex min-h-[88vh] items-center">
-
             <div class="max-w-2xl">
-
                 {{-- Sur-titre --}}
-                <p class="text-sm font-semibold uppercase tracking-[0.25em] text-accent-600">
+                <p class="animate-hero text-sm font-semibold uppercase tracking-[0.25em] text-accent-600">
                     Commune de Moselle
                 </p>
-
                 {{-- Titre --}}
-                <h1 class="mt-5 text-6xl font-bold leading-[1.05] tracking-tight text-white lg:text-7xl">
+                <h1 class="animate-hero-delay-1 mt-5 text-6xl font-bold leading-[1.05] tracking-tight text-white lg:text-7xl">
                     Bienvenue à<br>
                     Veckersviller
                 </h1>
-
                 {{-- Description --}}
-                <p class="mt-7 max-w-xl text-xl leading-relaxed text-white/90">
+                <p class="animate-hero-delay-2 mt-7 max-w-xl text-xl leading-relaxed text-white/90">
                     Retrouvez les actualités de la commune,
                     les informations pratiques et les documents municipaux.
                 </p>
-
                 {{-- Boutons --}}
-                <div class="mt-10 flex flex-wrap gap-4">
-
+                <div class="animate-hero-delay-3 mt-10 flex flex-wrap gap-4">
                     <a
                         href="/actualites"
                         class="inline-flex items-center gap-4 rounded-xl bg-white px-8 py-4
                                font-semibold text-slate-900 transition
                                hover:bg-slate-100">
                         Voir les actualités
-
                         <svg
                             class="h-5 w-5"
                             viewBox="0 0 24 24"
@@ -72,7 +72,6 @@
                                 d="M5 12h14m-6-6 6 6-6 6" />
                         </svg>
                     </a>
-
                     <a
                         href="/documents"
                         class="inline-flex items-center rounded-xl border
@@ -81,29 +80,24 @@
                                transition hover:bg-white/20">
                         Documents municipaux
                     </a>
-
                 </div>
-
             </div>
-
         </x-site.container>
     </div>
-
 </section>
 
 {{-- Informations pratiques --}}
 <section class="bg-white">
-
     <x-site.container class="py-16 sm:py-20">
-
         <x-site.section-heading
             title="Informations pratiques"
-            description="Les informations essentielles pour vos démarches et votre quotidien." />
-
+            description="Les informations essentielles pour vos démarches et votre quotidien."
+            data-reveal />
         <div class="mt-10 grid gap-6 lg:grid-cols-3">
-
             {{-- Horaires --}}
-            <div class="rounded-2xl border border-stone-200 bg-white p-6">
+            <div
+                data-reveal
+                class="rounded-2xl border border-stone-200 bg-white p-6">
 
                 <div class="flex size-11 items-center justify-center rounded-xl bg-primary-50 text-primary-800">
                     <svg
@@ -173,9 +167,10 @@
                 </div>
 
             </div>
-
             {{-- Localisation --}}
-            <div class="flex flex-col rounded-2xl border border-stone-200 bg-white p-6">
+            <div
+                data-reveal
+                class="reveal-delay-1 flex flex-col rounded-2xl border border-stone-200 bg-white p-6">
 
                 <div class="flex size-11 items-center justify-center rounded-xl bg-primary-50 text-primary-800">
                     <svg
@@ -217,7 +212,6 @@
                 </div>
 
             </div>
-
             {{-- Météo --}}
             <x-site.weather-card
                 :temperature="$weather['temperature']"
@@ -225,94 +219,83 @@
                 :humidity="$weather['humidity']"
                 :wind-speed="$weather['wind_speed']"
                 :description="$weather['description']"
-                :icon="$weather['icon']" />
-
+                :icon="$weather['icon']"
+                data-reveal
+                class="reveal-delay-2" />
         </div>
-
     </x-site.container>
-
 </section>
 
 {{-- Actualités --}}
 <section class="bg-stone-50">
-
     <x-site.container class="py-16 sm:py-20">
-
         <x-site.section-heading
             title="Actualités"
             description="Les dernières informations de la commune de Veckersviller."
             :link="route('posts.index')"
-            link-text="Toutes les actualités" />
-
+            link-text="Toutes les actualités"
+            data-reveal />
         @if ($posts->isNotEmpty())
-
         <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
-            @foreach ($posts as $post)
-            <x-site.post-card :post="$post" />
+            @foreach ($posts as $index => $post)
+            <div
+                data-reveal
+                style="--reveal-delay: {{ min($index * 100, 400) }}ms">
+                <x-site.post-card :post="$post" />
+            </div>
             @endforeach
-
         </div>
-
         @else
-
-        <div class="mt-10 rounded-2xl border border-dashed border-stone-300 bg-white p-10 text-center">
+        <div
+            data-reveal
+            class="mt-10 rounded-2xl border border-dashed border-stone-300 bg-white p-10 text-center">
             <p class="text-sm text-stone-600">
                 Aucune actualité pour le moment.
             </p>
         </div>
-
         @endif
-
     </x-site.container>
-
 </section>
 
 {{-- Documents --}}
 <section class="bg-primary-50">
-
     <x-site.container class="py-16 sm:py-20">
-
         <div class="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
-
-            <div>
+            <div data-reveal="left">
                 <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent-600">
                     Vie municipale
                 </p>
-
                 <h2 class="mt-3 text-3xl font-semibold tracking-tight text-primary-950">
                     Documents municipaux
                 </h2>
-
                 <p class="mt-4 max-w-2xl text-base leading-7 text-stone-600">
                     Retrouvez facilement les arrêtés, délibérations,
                     procès-verbaux et autres documents publiés par la commune.
                 </p>
             </div>
-
-            <a
-                href="{{ route('documents.index') }}"
-                class="inline-flex items-center justify-center rounded-lg bg-primary-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-800">
-                Consulter les documents
-
-                <span class="ml-2" aria-hidden="true">
-                    →
-                </span>
-            </a>
-
+            <div data-reveal="right">
+                <a
+                    href="{{ route('documents.index') }}"
+                    class="inline-flex items-center justify-center rounded-lg bg-primary-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-800">
+                    Consulter les documents
+                    <span class="ml-2" aria-hidden="true">
+                        →
+                    </span>
+                </a>
+            </div>
         </div>
-
     </x-site.container>
-
 </section>
 
 <section class="bg-white" id="contact">
     <x-site.container class="py-16 sm:py-20">
         <x-site.section-heading
             title="Nous contacter"
-            description="Une question, une demande ou besoin d'une information ? Contactez la mairie à l'aide du formulaire ci-dessous." />
-
-        <div class="mt-10">
+            description="Une question, une demande ou besoin d'une information ? Contactez la mairie à l'aide du formulaire ci-dessous."
+            data-reveal />
+        <div
+            data-reveal
+            class="mt-10">
             <x-site.contact-form />
         </div>
     </x-site.container>

@@ -7,7 +7,7 @@
 'icon' => null,
 ])
 
-<div class="rounded-2xl bg-primary-950 p-6 text-white">
+<div {{ $attributes->merge(['class' => 'rounded-2xl bg-primary-950 p-6 text-white']) }}>
 
     <div class="flex items-start justify-between gap-4">
 

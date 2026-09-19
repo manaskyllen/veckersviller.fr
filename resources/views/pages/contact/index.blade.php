@@ -11,15 +11,15 @@
 
     <x-site.container class="py-16 sm:py-20">
 
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent-600">
+        <p class="animate-hero text-sm font-semibold uppercase tracking-[0.2em] text-accent-600">
             Mairie de Veckersviller
         </p>
 
-        <h1 class="mt-3 text-4xl font-semibold tracking-tight text-primary-950 sm:text-5xl">
+        <h1 class="animate-hero-delay-1 mt-3 text-4xl font-semibold tracking-tight text-primary-950 sm:text-5xl">
             Contact
         </h1>
 
-        <p class="mt-5 max-w-2xl text-lg leading-8 text-stone-600">
+        <p class="animate-hero-delay-2 mt-5 max-w-2xl text-lg leading-8 text-stone-600">
             Une question, une demande ou besoin d'une information ?
             Contactez la mairie à l'aide du formulaire ci-dessous.
         </p>
@@ -37,7 +37,9 @@
         <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
 
             {{-- Informations --}}
-            <div class="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
+            <div
+                data-reveal="left"
+                class="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
 
                 <p class="text-sm font-semibold uppercase tracking-[0.15em] text-accent-600">
                     Nous contacter
@@ -263,7 +265,9 @@
 
             </div>
 
-            <x-site.contact-form />
+            <div data-reveal="right">
+                <x-site.contact-form />
+            </div>
 
         </div>
 
