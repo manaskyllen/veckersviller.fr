@@ -239,6 +239,7 @@ actualités, informations pratiques, horaires et documents municipaux.
         <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach ($posts as $index => $post)
             <div
+                class="min-w-0 w-full"
                 data-reveal
                 style="--reveal-delay: {{ min($index * 100, 400) }}ms">
                 <x-site.post-card :post="$post" />
