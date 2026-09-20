@@ -38,19 +38,25 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
+        if ($this->app->runningInConsole()) {
+            return;
+        }
+
         $mailSetting = Cache::remember(
             'mail_settings',
             now()->addHour(),
-            fn() => MailSetting::query()->first()?->only([
-                'mailer',
-                'scheme',
-                'host',
-                'port',
-                'username',
-                'password',
-                'from_address',
-                'from_name',
-            ])
+            fn() => MailSetting::query()
+                ->first()
+                ?->only([
+                    'mailer',
+                    'scheme',
+                    'host',
+                    'port',
+                    'username',
+                    'password',
+                    'from_address',
+                    'from_name',
+                ])
         );
 
         if ($mailSetting) {
