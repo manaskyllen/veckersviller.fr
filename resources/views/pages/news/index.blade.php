@@ -31,7 +31,7 @@
 {{-- Liste --}}
 <section class="bg-stone-50">
 
-    <x-site.container class="py-12 sm:py-16">
+    <x-site.container class="w-full min-w-0 py-12 sm:py-16">
 
         @if ($posts->isEmpty())
 
@@ -47,25 +47,34 @@
 
         @else
 
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid w-full min-w-0 grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+
             @foreach ($posts as $index => $post)
+
             <div
                 data-reveal
+                class="min-w-0 w-full"
                 style="--reveal-delay: {{ min($index * 100, 400) }}ms">
+
                 <x-site.post-card :post="$post" />
+
             </div>
+
             @endforeach
+
         </div>
 
         {{-- Pagination --}}
         @if ($posts->hasPages())
+
         <div
             data-reveal
-            class="mt-12">
+            class="mt-12 min-w-0">
 
             {{ $posts->links() }}
 
         </div>
+
         @endif
 
         @endif

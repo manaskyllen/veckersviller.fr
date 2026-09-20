@@ -2,22 +2,22 @@
 
 /* Marianne - Regular (Poids 400) */
 @font-face {
-  font-family: 'Marianne';
-  src: url('../fonts/Marianne-Regular.woff2') format('woff2'),
-       url('../fonts/Marianne-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Marianne';
+    src: url('../fonts/Marianne-Regular.woff2') format('woff2'),
+        url('../fonts/Marianne-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* Marianne - Bold (Poids 700) */
 @font-face {
-  font-family: 'Marianne';
-  src: url('../fonts/Marianne-Bold.woff2') format('woff2'),
-       url('../fonts/Marianne-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Marianne';
+    src: url('../fonts/Marianne-Bold.woff2') format('woff2'),
+        url('../fonts/Marianne-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -54,6 +54,11 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        overflow-x: clip;
+    }
+
+    body {
+        overflow-x: clip;
     }
 }
 
