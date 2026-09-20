@@ -24,6 +24,7 @@ class MailSetting extends Model
     protected function casts(): array
     {
         return [
+            'port' => 'integer',
             'password' => 'encrypted',
         ];
     }

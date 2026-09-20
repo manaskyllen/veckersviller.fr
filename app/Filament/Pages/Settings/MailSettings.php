@@ -9,6 +9,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Cache;
 
 class MailSettings extends Page
 {
@@ -116,6 +117,8 @@ class MailSettings extends Page
         }
 
         $settings->update($data);
+
+        Cache::forget('mail_settings');
 
         Notification::make()
             ->title('Configuration e-mail enregistrée')
