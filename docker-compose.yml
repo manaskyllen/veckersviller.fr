@@ -33,16 +33,5 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  scraper:
-    image: python:3.13-slim
-    working_dir: /workspace
-    volumes:
-      - ./scripts/lixheim:/workspace
-    command: >
-      sh -c "
-        pip install -r requirements.txt &&
-        python scraper.py
-      "
-
 volumes:
   postgres_data:
