@@ -4,12 +4,6 @@ window.Alpine = Alpine
 
 Alpine.start()
 
-/*
-|--------------------------------------------------------------------------
-| Scroll reveal
-|--------------------------------------------------------------------------
-*/
-
 const revealElements = document.querySelectorAll('[data-reveal]')
 
 if (revealElements.length > 0) {

@@ -12,9 +12,6 @@ class SiteSettingSeeder extends Seeder
         SiteSetting::create([
             'site_name' => 'Mairie de Veckersviller',
             'site_tagline' => null,
-
-            // Fichiers personnalisés via Filament.
-            // Les valeurs par défaut sont dans public/images/.
             'logo_header' => null,
             'logo_footer' => null,
             'hero_image' => null,
